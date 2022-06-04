@@ -1,0 +1,43 @@
+.hm-gradient {
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+
+.form-control {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.contact-us {
+  padding: 70px 0px;
+  background: #cfa5ce59;
+}
+
+.section-title h2 {
+  color: black;
+  font-size: 30px;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  border-bottom: 5px solid #a7cfa5;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.section-title p {
+  color: black;
+  margin-bottom: 10px;
+}
+
+.contact-us textarea {
+  background: #fafafa;
+}
+
+.contact-us textarea {
+  min-height: 188px;
+  max-width: 100%;
+}
+
+.contact-us .map {
+  overflow: hidden;
+  border-radius: 4px;
+}

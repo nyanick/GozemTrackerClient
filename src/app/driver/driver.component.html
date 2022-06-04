@@ -1,0 +1,192 @@
+<div class="hm-gradient">
+  
+<body class="hm-gradient">
+    
+    <main>
+      
+      <!--MDB Forms-->
+      <div class="container mt-4">
+
+        <div class="text-center darken-grey-text mb-4">
+            <span class="btn btn-success btn-md" target="_blank">Web Driver<i class="fa fa-download pl-2"></i></span>
+            <h1 class="font-bold mt-4 mb-3 h5">Kindly enter your Delivery ID to your delivery and consult your package with full details</h1>
+        </div>
+
+        <div>
+          <div class="input-group">
+            <form class="row" style="width: 100%;"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate >
+              <div class="col-sm-10">
+                <div class="form-outline" style="width: 100%;">
+                  <input type="text" class="form-control" placeholder="Enter Delivery ID" required  name="deliveryId" [(ngModel)]="form.deliveryId" #packageId="ngModel" />
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button type="submit" style="background-color: rgb(15, 119, 15);" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <br>
+        <div class="text-center darken-grey-text mb-4">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="isSearchFailed"
+          >
+            Search failed: {{ errorMessage }}
+          </div>
+        </div>
+
+      </div>
+    </main>
+    
+    <main *ngIf="isSearch">    
+
+        
+            <!-- Contact Us Section -->
+      <section class="contact-us" *ngIf="isSearch" ng-hide="data == null">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-7">
+                      <div class="section-title">
+                          <h4>Package Details</h4>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-lg-5">
+
+                    <table class="table table-sm">
+
+                      <!-- <tr *ngFor="let lign of result let i=index" [attr.data.index]="i">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{ligne.immatriculation}}</td>
+                        <td>{{ligne.marque.kind_name}}</td>
+                        <td>{{ligne.model}}</td>
+                      </tr> -->
+
+                      <tbody>
+                        <tr >
+                          <th scope="col">Package ID</th>
+                          <td scope="col" *ngIf="data">{{ data.package_id}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Description</th>
+                          <td *ngIf="data" >{{ data.description}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Dimension</th>
+                          <td *ngIf="data"> Weight: {{ data.weight}}, Width: {{ data.width}}, Height: {{ data.height}}, Depth: {{ data.depth}} </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Sender Name</th>
+                          <td *ngIf="data" colspan="2">{{ data.from_name}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Sender Address</th>
+                          <td *ngIf="data" colspan="2">{{ data.from_address}}. Lat {{ data.from_location.lat}}, Lon {{ data.from_location.lng }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Receiver Name</th>
+                          <td *ngIf="data" colspan="2">{{ data.to_name}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Receiver Address</th>
+                          <td *ngIf="data" colspan="2">{{ data.to_address}}. Lat {{ data.to_location.lat}}, Lon {{ data.to_location.lng}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div class="col-md-5">
+                      <div class="section-title">
+                          <h4>Active Delivery Details</h4>
+                      </div>
+                    <div *ngIf="!isActiveDelivery"><h5>Currently no active delivery, please track again later</h5></div>
+                  </div>
+
+                   <table class="table table-sm">
+                      <tbody>
+                        <tr>
+                          <th scope="col">Delivery ID</th>
+                          <td *ngIf="active_delivery" scope="col">{{ active_delivery.delivery_id }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Status</th>
+                          <td *ngIf="active_delivery">{{ active_delivery.status }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">PickUp Time</th>
+                          <td *ngIf="active_delivery"> {{ active_delivery.pickup_time }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Start Time</th>
+                          <td *ngIf="active_delivery" colspan="2">{{ active_delivery.start_time }}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">End Time</th>
+                          <td *ngIf="active_delivery" colspan="2">{{ active_delivery.end_time }}</td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+
+
+                      
+                  </div>
+
+                  <div class="col-lg-7">
+                    <div class="row">
+                      <div class="col-lg-7">
+                        <div class="map">
+                          <iframe [src]="urlSafe" width="100%" height="350" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                      </div>
+
+                      </div>
+                      <div class="col">
+                        
+                        
+                        
+                        
+                        
+                          <table class="table table-sm">
+                          <tbody>
+                            <tr>
+                              <th scope="row"><button [disabled]="!pickup" type="button" (click)="submitButtons('Pickedup',active_delivery._id)" class="btn btn-info">Picked Up</button></th>
+                            </tr>
+                            <tr>
+                              <th scope="row"><button [disabled]="!transit" type="button" (click)="submitButtons('in-transit',active_delivery._id)"  class="btn btn-warning">In-transit</button></th>
+                            </tr>
+                            <tr>
+                              <th scope="row"><button [disabled]="!end" type="button" (click)="submitButtons('delivered',active_delivery._id)"  style="background-color: green;" class="btn btn-secondary">Delivered</button></th>
+                            </tr>
+                            <tr>
+                              <th scope="row"><button [disabled]="!end" type="button" (click)="submitButtons('failed',active_delivery._id)" style="background-color: red;"  class="btn btn-dark">Failed</button></th>
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                        
+                      </div>
+
+                    </div>
+                      
+                      
+                  </div>
+
+                  
+              </div>
+          </div>
+      </section>
+      <!-- End Contact Us Section -->
+
+      
+    </main>
+  
+</body>
+
+</div>

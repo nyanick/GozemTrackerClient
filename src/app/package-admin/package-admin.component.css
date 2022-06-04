@@ -1,0 +1,44 @@
+button{
+    height: fit-content;
+    
+    font-weight: bold;
+}
+
+.box{
+    height: 50rem;
+    width: 70rem;
+    
+    background-color: rgb(224, 224, 224);
+}
+
+.box-1{
+    height: 20rem;
+    width: 25rem;
+    border-color: black;
+    background-color: white;
+}
+
+label{
+    font-weight: bold;
+}
+
+.box-2{
+    height: 20rem;
+    width: 45rem;
+    background-color: seashell;
+}
+#table_size{
+    height: 20rem;
+
+}
+
+#table_delivery{
+    height: 20rem;
+    width: 50rem;
+    
+}
+div .my-5{
+    margin-right: 3em;
+
+    margin-top: 3em;
+}
